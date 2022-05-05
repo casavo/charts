@@ -1,0 +1,24 @@
+{{- if .Values.nginxConfig.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "app.fullname" . }}-nginx
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+data:
+  default.conf: |-
+    server {
+      listen 80;
+
+      location / {
+        root   /usr/share/nginx/html;
+        index  index.html;
+        try_files $uri $uri/ /index.html;
+      }
+
+      gzip on;
+      gzip_comp_level 5;
+      gzip_vary on;
+      gzip_types text/plain text/css application/json application/x-javascript application/javascript text/xml application/xml application/rss+xml text/javascript image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype;
+    }
+{{- end }}
