@@ -79,6 +79,17 @@ spec:
             timeoutSeconds: {{ .timeoutSeconds }}
             {{- end }}
           {{- end }}
+          {{- if .Values.probes.startup.enabled }}
+          startupProbe:
+            {{- with .Values.probes.startup }}
+            httpGet:
+              path: {{ .path }}
+              port: 80
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            {{- end }}
+          {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

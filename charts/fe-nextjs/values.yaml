@@ -45,6 +45,12 @@ probes:
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
+  startup:
+    enabled: false
+    path: /_health
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
 
 service:
   annotations: {}
