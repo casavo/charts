@@ -1,0 +1,26 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches: [ master ]
+    types: [ opened, synchronize ]
+    paths:
+      - charts/**
+
+jobs:
+  lint:
+    name: Helm lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+      - name: Lint charts
+        run: |
+          for CHART_FILE in charts/**/Chart.yaml; do
+            helm dependency update $(dirname $CHART_FILE)
+            helm lint $(dirname $CHART_FILE)
+          done
