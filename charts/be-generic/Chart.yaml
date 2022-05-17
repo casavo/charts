@@ -1,0 +1,15 @@
+apiVersion: v2
+type: application
+name: be-generic
+description: Generic BE application
+
+version: 0.1.0
+appVersion: latest
+kubeVersion: ">=1.14.0-0"
+
+home: https://github.com/Casavo/charts
+sources:
+  - https://github.com/Casavo/charts
+maintainers:
+  - name: Casavo
+    email: engineering@casavo.com
