@@ -68,8 +68,8 @@ Common labels
 {{- define "app.baseLabels" -}}
 helm.sh/chart: {{ include "app.chart" . }}
 {{ include "app.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- if .Values.image.tag }}
+app.kubernetes.io/version: {{ .Values.image.tag | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- with .Values.labels }}
@@ -91,8 +91,8 @@ Hook labels
 {{- define "app.hookLabels" -}}
 helm.sh/chart: {{ include "app.chart" .globals }}
 {{ include "app.hookSelectorLabels" . }}
-{{- if .globals.Chart.AppVersion }}
-app.kubernetes.io/version: {{ .globals.Chart.AppVersion | quote }}
+{{- if .globals.Values.image.tag }}
+app.kubernetes.io/version: {{ .globals.Values.image.tag | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .globals.Release.Service }}
 app: {{ include "app.name" .globals }}-hook-{{ .hook.name | replace "_" "-" }}
@@ -107,8 +107,8 @@ Cron labels
 {{- define "app.cronLabels" -}}
 helm.sh/chart: {{ include "app.chart" .globals }}
 {{ include "app.cronSelectorLabels" . }}
-{{- if .globals.Chart.AppVersion }}
-app.kubernetes.io/version: {{ .globals.Chart.AppVersion | quote }}
+{{- if .globals.Values.image.tag }}
+app.kubernetes.io/version: {{ .globals.Values.image.tag | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .globals.Release.Service }}
 app: {{ include "app.name" .globals }}-cron-{{ .name | replace "_" "-" }}
@@ -123,8 +123,8 @@ Worker labels
 {{- define "app.workerLabels" -}}
 helm.sh/chart: {{ include "app.chart" .globals }}
 {{ include "app.workerSelectorLabels" . }}
-{{- if .globals.Chart.AppVersion }}
-app.kubernetes.io/version: {{ .globals.Chart.AppVersion | quote }}
+{{- if .globals.Values.image.tag }}
+app.kubernetes.io/version: {{ .globals.Values.image.tag | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .globals.Release.Service }}
 app: {{ include "app.name" .globals }}-worker-{{ .name | replace "_" "-" }}
