@@ -190,6 +190,7 @@ monitoring:
     enabled: false
     path: /metrics
     serviceMonitor: false
+    podMonitor: false
 
   alerts: []
     # - alert: ExampleError
