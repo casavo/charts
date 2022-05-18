@@ -1,0 +1,62 @@
+{{- if .Values.autoscaling.enabled }}
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ template "app.fullname" . }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ template "app.fullname" . }}
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}
+{{- range $key, $wrk := .Values.workers }}
+{{ $wdata := dict "name" $key "worker" $wrk "globals" $ }}
+{{ $scaling := $wrk.autoscaling | default dict }}
+{{- if $scaling.enabled }}
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ template "app.fullname" $ }}-wrk-{{ $key | replace "_" "-" }}
+  labels:
+    {{- include "app.workerLabels" $wdata | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "app.fullname" $ }}-wrk-{{ $key | replace "_" "-" }}
+  minReplicas: {{ $scaling.minReplicas | default 1 }}
+  maxReplicas: {{ $scaling.maxReplicas | default 3 }}
+  metrics:
+    {{- with $scaling.targetCPUUtilizationPercentage | default "100" }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ . }}
+    {{- end }}
+    {{- with $scaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ . }}
+    {{- end }}
+{{- end }}
+{{- end }}
