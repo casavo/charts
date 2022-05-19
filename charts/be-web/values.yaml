@@ -32,12 +32,24 @@ podDisruptionBudget: {}
 deploymentStrategy:
   type: RollingUpdate
 
-service:
-  annotations: {}
-  type: ClusterIP
-  port: "8000"
-  containerPort: "8000"
-  # nodePort:
+services:
+  main:
+    annotations: {}
+    type: ClusterIP
+    port: "8000"
+    containerPort: "8000"
+    # nodePort:
+  dashboard:
+    annotations: {}
+    type: ClusterIP
+    port: "8001"
+    containerPort: "8001"
+  epmd:
+    annotations: {}
+    type: ClusterIP
+    clusterIP: None
+    port: "5934"
+    containerPort: "5934"
 
 probes:
   liveness:
@@ -59,25 +71,20 @@ probes:
     periodSeconds: 10
     timeoutSeconds: 5
 
-ingress:
-  enabled: false
-  # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
-  # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-  # className: nginx
-  # Values can be templated
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-
-  # pathType is only for k8s >= 1.1=
-  pathType: Prefix
-
-  hosts:
-    - app.local
-  tls: []
-  #  - secretName: app-tls
-  #    hosts:
-  #      - app.local
+ingresses:
+  app.local:
+    annotations: {}
+    pathType: Prefix
+    tls: []
+    service: web
+    additionalHosts: []
+  dashboard.private.com:
+    annotations:
+      kubernetes.io/ingress.class: "internal"
+    pathType: Prefix
+    tls: []
+    service: dashboard
+    additionalHosts: []
 
 resources:
   limits:
