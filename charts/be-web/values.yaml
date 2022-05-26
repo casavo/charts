@@ -168,6 +168,19 @@ workers: {}
   #   affinity: {}
   #   nodeSelector: {}
 
+  #   probes:
+  #     liveness:
+  #       enabled: false
+  #       path: /_health
+  #       port: "8000"
+  #       initialDelaySeconds: 30
+  #       periodSeconds: 10
+  #       timeoutSeconds: 5
+  #     readiness:
+  #       enabled: false
+  #     startup:
+  #       enabled: false
+
 crons: {}
   # example:
   #   image:
