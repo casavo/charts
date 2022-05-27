@@ -55,14 +55,14 @@ spec:
             {{- end }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
             {{- with .Values.probes.liveness }}
             httpGet:
               path: {{ .path }}
-              port: 80
+              port: {{ .Values.service.containerPort }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
@@ -73,7 +73,7 @@ spec:
             {{- with .Values.probes.readiness }}
             httpGet:
               path: {{ .path }}
-              port: 80
+              port: {{ .Values.service.containerPort }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
@@ -84,7 +84,7 @@ spec:
             {{- with .Values.probes.startup }}
             httpGet:
               path: {{ .path }}
-              port: 80
+              port: {{ .Values.service.containerPort }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}

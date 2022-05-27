@@ -36,6 +36,7 @@ service:
   annotations: {}
   type: ClusterIP
   port: "8000"
+  containerPort: "80"
   # nodePort:
 
 ingress:
