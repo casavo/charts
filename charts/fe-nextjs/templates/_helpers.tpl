@@ -36,8 +36,8 @@ Common labels
 {{- define "app.labels" -}}
 helm.sh/chart: {{ include "app.chart" . }}
 {{ include "app.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- if .Values.image.tag }}
+app.kubernetes.io/version: {{ .Values.image.tag | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- with .Values.labels }}
@@ -59,8 +59,8 @@ Common proxy labels
 {{- define "app.proxyLabels" -}}
 helm.sh/chart: {{ include "app.chart" . }}
 {{ include "app.proxySelectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- if .Values.image.tag }}
+app.kubernetes.io/version: {{ .Values.image.tag | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- with .Values.labels }}
