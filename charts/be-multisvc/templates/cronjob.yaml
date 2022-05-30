@@ -1,0 +1,89 @@
+{{- range $key, $val := .Values.crons }}
+{{ $cdata := dict "name" $key "cron" $val "globals" $ }}
+{{ $imgdata := .image | default $.Values.image }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "app.fullname" $ }}-cron-{{ $key | replace "_" "-" }}
+  labels:
+    {{- include "app.cronLabels" $cdata | nindent 4 }}
+    app.kubernetes.io/component: batch-process
+spec:
+  schedule: {{ .schedule }}
+  startingDeadlineSeconds: 1000
+  suspend: {{ .suspend }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "app.cronLabels" $cdata | nindent 8 }}
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "app.cronLabels" $cdata | nindent 12 }}
+        spec:
+          {{- with $imgdata.pullSecrets | default $.Values.image.pullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $.Values.priorityClassName }}
+          priorityClassName: {{ . | quote }}
+          {{- end }}
+          {{- with $.Values.podSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          containers:
+            - name: {{ $.Chart.Name }}
+              {{- with $.Values.securityContext }}
+              securityContext:
+                {{- toYaml $.Values.securityContext | nindent 16 }}
+              {{- end }}
+              image: "{{ $imgdata.repository }}:{{ $imgdata.tag | default (printf "%s" $.Chart.AppVersion) }}"
+              imagePullPolicy: {{ $imgdata.pullPolicy | default $.Values.image.pullPolicy }}
+              {{- with .command }}
+              command:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              env:
+                {{- with .envValueFrom }}
+                {{- range $key, $value := . }}
+                - name: {{ $key }}
+                  valueFrom:
+                    {{- toYaml $value | nindent 20 }}
+                {{- end }}
+                {{- end }}
+                {{- with .env }}
+                {{- range $key, $value := . }}
+                - name: {{ $key }}
+                  value: {{ $value | quote }}
+                {{- end }}
+                {{- end }}
+              envFrom:
+                - configMapRef:
+                    name: {{ include "app.fullname" $ }}
+                {{- with .envFrom }}
+                {{- toYaml . | nindent 16 }}
+                {{- end }}
+              {{- with .resources | default $.Values.resources }}
+              resources:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+          restartPolicy: Never
+          {{- with .nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $.Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      backoffLimit: 0
+{{- end }}
