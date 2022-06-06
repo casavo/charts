@@ -141,6 +141,7 @@ hooks: []
 
   #   command:
 
+  #   env: {}
   #   envFrom: []
   #   envValueFrom: {}
   #   resources: {}
@@ -166,6 +167,7 @@ workers: {}
   #     targetCPUUtilizationPercentage: 200
   #     targetMemoryUtilizationPercentage: 150
 
+  #   env: {}
   #   envFrom: []
   #   envValueFrom: {}
   #   resources: {}
@@ -197,6 +199,7 @@ crons: {}
   #   schedule: 0 8 * * 3,6
   #   suspend: false
 
+  #   env: {}
   #   envFrom: []
   #   resources: {}
 

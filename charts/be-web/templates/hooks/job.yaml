@@ -42,15 +42,30 @@ spec:
           command:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .envValueFrom }}
           env:
+            {{- with .envValueFrom }}
             {{- range $key, $value := . }}
             - name: {{ $key }}
               valueFrom:
                 {{- toYaml $value | nindent 16 }}
             {{- end }}
-          {{- end }}
+            {{- end }}
+            {{- with $.Values.env }}
+            {{- range $key, $value := . }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
+            {{- with .env }}
+            {{- range $key, $value := . }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
           envFrom:
+            {{- with $.Values.envFrom }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
             {{- with .envFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
