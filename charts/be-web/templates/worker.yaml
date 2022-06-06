@@ -70,11 +70,11 @@ spec:
             {{- end }}
             {{- end }}
           envFrom:
-            - configMapRef:
-                name: {{ include "app.fullname" $ }}
             {{- with $.Values.envFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+            - configMapRef:
+                name: {{ include "app.fullname" $ }}
           {{- with .probes.liveness }}
           livenessProbe:
             {{- if .enabled }}
