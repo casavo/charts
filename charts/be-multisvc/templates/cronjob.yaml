@@ -56,6 +56,12 @@ spec:
                     {{- toYaml $value | nindent 20 }}
                 {{- end }}
                 {{- end }}
+                {{- with $.Values.env }}
+                {{- range $key, $value := . }}
+                - name: {{ $key }}
+                  value: {{ $value | quote }}
+                {{- end }}
+                {{- end }}
                 {{- with .env }}
                 {{- range $key, $value := . }}
                 - name: {{ $key }}
@@ -63,6 +69,9 @@ spec:
                 {{- end }}
                 {{- end }}
               envFrom:
+                {{- with $.Values.envFrom }}
+                {{- toYaml . | nindent 16 }}
+                {{- end }}
                 {{- with .envFrom }}
                 {{- toYaml . | nindent 16 }}
                 {{- end }}

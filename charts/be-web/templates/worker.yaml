@@ -69,8 +69,17 @@ spec:
               value: {{ $value | quote }}
             {{- end }}
             {{- end }}
+            {{- with .env }}
+            {{- range $key, $value := . }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
           envFrom:
             {{- with $.Values.envFrom }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with .envFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
             - configMapRef:

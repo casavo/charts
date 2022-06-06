@@ -3,7 +3,7 @@ type: application
 name: be-web
 description: Generic web BE application
 
-version: 0.2.1
+version: 0.3.0
 appVersion: latest
 kubeVersion: ">=1.14.0-0"
 
