@@ -216,6 +216,7 @@ monitoring:
     path: /metrics
     port: "8000"
     serviceMonitor: false
+    serviceMonitorAnnotations: {} # FIXME: make serviceMonitor a map
     podMonitor: false
 
   alerts: []
