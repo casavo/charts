@@ -1,5 +1,5 @@
 {{- range $key, $ingress := .Values.ingresses }}
-{{- if $ingress.enabled -}}
+{{- if $ingress.enabled }}
 ---
 {{- $fullName := printf "%s-%s" (include "app.fullname" $) ($key | replace "_" "-") -}}
 {{- if and $ingress.className (not (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion)) }}
