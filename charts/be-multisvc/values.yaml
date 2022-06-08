@@ -132,7 +132,7 @@ config: {}
 
 hooks: []
   # - name: example
-  #   on: post-install,pre-upgrade
+  #   "on": post-install,pre-upgrade # WARNING: use quotes around "on" https://yaml.org/type/bool.html
   #   weight: -1
 
   #   image:
