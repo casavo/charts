@@ -1,10 +1,11 @@
 {{- range $key, $val := .Values.services }}
 ---
 {{- with $val }}
+{{- $name := .fullnameOverride | default (printf "%s-%s" (include "app.fullname" $) ($key | replace "_" "-")) }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "app.fullname" $ }}-{{ $key | replace "_" "-" }}
+  name: {{ $name }}
   labels:
     {{- include "app.labels" $ | nindent 4 }}
   {{- with .annotations }}

@@ -32,13 +32,13 @@ podDisruptionBudget: {}
 deploymentStrategy:
   type: RollingUpdate
 
-services:
-  web:
-    annotations: {}
-    type: ClusterIP
-    port: "8000"
-    containerPort: "8000"
-    # nodePort:
+services: {}
+  # web:
+  #   annotations: {}
+  #   type: ClusterIP
+  #   port: "8000"
+  #   containerPort: "8000"
+  #   # nodePort:
 
 probes:
   liveness:
