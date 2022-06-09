@@ -118,7 +118,7 @@ securityContext: {}
   # runAsUser: 1000
 
 volumes: []
-volumeMoiunts: []
+volumeMounts: []
 
 env: {}
 envFrom: []
