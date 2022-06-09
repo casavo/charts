@@ -36,7 +36,7 @@ spec:
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}
           {{- end }}
-          image: "{{ $imgdata.repository }}:{{ $imgdata.tag | default (printf "%s" $.Chart.AppVersion) }}"
+          image: "{{ $imgdata.repository }}:{{ $imgdata.tag | default "latest" }}"
           imagePullPolicy: {{ $imgdata.pullPolicy | default $.Values.image.pullPolicy }}
           {{- with .command }}
           command:
