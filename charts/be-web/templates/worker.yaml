@@ -49,7 +49,7 @@ spec:
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}
           {{- end }}
-          image: "{{ $imgdata.repository }}:{{ $imgdata.tag | default "latest" }}"
+          image: "{{ $imgdata.repository | default $.Values.image.repository }}:{{ $imgdata.tag | default $.Values.image.tag }}"
           imagePullPolicy: {{ $imgdata.pullPolicy | default $.Values.image.pullPolicy }}
           {{- with .command }}
           command:
