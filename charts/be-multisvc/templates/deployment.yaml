@@ -59,7 +59,7 @@ spec:
           ports:
             {{- range $svcKey, $svcData := .Values.services }}
             - name: {{ $svcKey }}
-              containerPort: {{ $svcData.containerPort }}
+              containerPort: {{ $svcData.containerPort | default "8000" }}
               protocol: TCP
             {{- end }}
           {{- if .Values.probes.liveness.enabled }}
