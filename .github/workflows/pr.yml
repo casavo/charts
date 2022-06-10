@@ -23,5 +23,5 @@ jobs:
           for CHART_FILE in charts/**/Chart.yaml; do
             helm dependency update $(dirname $CHART_FILE)
             helm lint $(dirname $CHART_FILE)
-            helm template $(dirname $CHART_FILE)
+            helm template $(dirname $CHART_FILE) > /dev/null
           done
