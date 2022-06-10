@@ -18,9 +18,10 @@ jobs:
         uses: azure/setup-helm@v1
         with:
           version: v3.4.0
-      - name: Lint charts
+      - name: Render charts
         run: |
           for CHART_FILE in charts/**/Chart.yaml; do
             helm dependency update $(dirname $CHART_FILE)
             helm lint $(dirname $CHART_FILE)
+            helm template $(dirname $CHART_FILE)
           done
