@@ -44,15 +44,14 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            {{- range $key, $value := .Values.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom:
+                {{- toYaml $value | nindent 16 }}
+            {{- end }}
             {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
-            {{- end }}
-            {{- range $key, $value := .Values.envValueFromObjectField }}
-            - name: {{ $key }}
-              valueFrom:
-                fieldRef:
-                  fieldPath: {{ $value | quote }}
             {{- end }}
           envFrom:
             {{- with .Values.envFrom }}
