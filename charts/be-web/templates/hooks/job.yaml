@@ -69,8 +69,6 @@ spec:
             {{- with .envFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-            - configMapRef:
-                name: {{ include "app.fullname" $ }}
           {{- with .resources | default $.Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
