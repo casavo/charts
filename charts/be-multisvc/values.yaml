@@ -125,6 +125,10 @@ volumeMounts: []
 
 env: {}
 envFrom: []
+envValueFrom: {}
+  # POD_IP:
+  #   fieldRef:
+  #     fieldPath: status.podIP
 
 ## app configuration
 config: {}

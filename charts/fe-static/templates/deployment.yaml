@@ -39,13 +39,16 @@ spec:
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.env }}
           env:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.envValueFrom }}
+            - name: {{ $key }}
+              valueFrom:
+                {{- toYaml $value | nindent 16 }}
+            {{- end }}
+            {{- range $key, $value := .Values.env }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
-          {{- end }}
           envFrom:
             {{- with .Values.envFrom }}
             {{- toYaml . | nindent 12 }}
