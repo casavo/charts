@@ -56,11 +56,15 @@ spec:
                     {{- toYaml $value | nindent 20 }}
                 {{- end }}
                 {{- end }}
-                {{- with $.Values.env }}
-                {{- range $key, $value := . }}
+                {{- range $key, $value := $.Values.env }}
                 - name: {{ $key }}
                   value: {{ $value | quote }}
                 {{- end }}
+                {{- range $key, $value := $.Values.envValueFromObjectField }}
+                - name: {{ $key }}
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: {{ $value | quote }}
                 {{- end }}
                 {{- with .env }}
                 {{- range $key, $value := . }}

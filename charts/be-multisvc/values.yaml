@@ -126,6 +126,9 @@ volumeMounts: []
 env: {}
 envFrom: []
 
+envValueFromObjectField: {}
+  # POD_IP: status.podIP
+
 ## app configuration
 config: {}
   # environment: debug
