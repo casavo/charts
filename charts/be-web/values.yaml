@@ -73,7 +73,9 @@ ingress:
   pathType: Prefix
 
   hosts:
-    - app.local
+    - host: app.local
+      paths:
+        - /
   tls: []
   #  - secretName: app-tls
   #    hosts:

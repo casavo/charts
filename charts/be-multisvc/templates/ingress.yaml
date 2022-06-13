@@ -41,10 +41,11 @@ spec:
   {{- end }}
   rules:
     {{- range $ingress.hosts }}
-    - host: {{ . | quote }}
+    - host: {{ .host | quote }}
       http:
         paths:
-          - path: /
+          {{- range .paths }}
+          - path: {{ . }}
             {{- if and $ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ $ingress.pathType }}
             {{- end }}
@@ -58,6 +59,7 @@ spec:
               serviceName: {{ $target | default $fullName }}
               servicePort: {{ $ingress.targetPort | default "8000" }}
               {{- end }}
+          {{- end }}
     {{- end }}
 {{- end }}
 {{- end }}
