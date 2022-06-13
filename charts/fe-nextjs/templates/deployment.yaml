@@ -65,7 +65,7 @@ spec:
             {{- with .Values.probes.liveness }}
             httpGet:
               path: {{ .path }}
-              port: {{ .Values.service.containerPort }}
+              port: {{ $.Values.service.containerPort }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
@@ -76,7 +76,7 @@ spec:
             {{- with .Values.probes.readiness }}
             httpGet:
               path: {{ .path }}
-              port: {{ .Values.service.containerPort }}
+              port: {{ $.Values.service.containerPort }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
@@ -87,7 +87,7 @@ spec:
             {{- with .Values.probes.startup }}
             httpGet:
               path: {{ .path }}
-              port: {{ .Values.service.containerPort }}
+              port: {{ $.Values.service.containerPort }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
