@@ -18,6 +18,20 @@ spec:
   clusterIP: {{ . }}
   {{- end }}
   ports:
+    {{- if .ports }}
+    {{- range $portName, $portData := .ports }}
+    - name: {{ $portName }}
+      port: {{ $portData.port | default "8000" }}
+      {{- if and (or (eq .type "NodePort") (eq .type "LoadBalancer")) .nodePort }}
+      nodePort: {{ .nodePort }}
+      {{- end }}
+      targetPort: {{ $portData.containerPort | default "8000" }}
+      protocol: TCP
+      {{- if semverCompare ">=1.20-0" $.Capabilities.KubeVersion.GitVersion }}
+      appProtocol: http
+      {{- end }}
+    {{- end }}
+    {{- else }}
     - name: http
       port: {{ .port | default "8000" }}
       {{- if and (or (eq .type "NodePort") (eq .type "LoadBalancer")) .nodePort }}
@@ -28,6 +42,7 @@ spec:
       {{- if semverCompare ">=1.20-0" $.Capabilities.KubeVersion.GitVersion }}
       appProtocol: http
       {{- end }}
+    {{- end }}
   selector:
     {{- include "app.selectorLabels" $ | nindent 4 }}
 {{- end }}

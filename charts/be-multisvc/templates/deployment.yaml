@@ -61,9 +61,17 @@ spec:
                 name: {{ include "app.fullname" . }}
           ports:
             {{- range $svcKey, $svcData := .Values.services }}
+            {{- if $svcData.ports }}
+            {{- range $portName, $portData := $svcData.ports }}
+            - name: {{ $portName }}
+              containerPort: {{ $portData.containerPort | default "8000" }}
+              protocol: TCP
+            {{- end }}
+            {{- else }}
             - name: {{ $svcKey }}
               containerPort: {{ $svcData.containerPort | default "8000" }}
               protocol: TCP
+            {{- end }}
             {{- end }}
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:

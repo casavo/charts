@@ -14,6 +14,20 @@ spec:
   clusterIP: {{ . }}
   {{- end }}
   ports:
+    {{- if .Values.service.ports }}
+    {{- range $portName, $portData := .Values.service.ports }}
+    - name: {{ $portName }}
+      port: {{ $portData.port | default "8000" }}
+      {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
+      targetPort: {{ $portData.containerPort | default "8000" }}
+      protocol: TCP
+      {{- if semverCompare ">=1.20-0" $.Capabilities.KubeVersion.GitVersion }}
+      appProtocol: http
+      {{- end }}
+    {{- end }}
+    {{- else }}
     - name: http
       port: {{ .Values.service.port }}
       {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) .Values.service.nodePort }}
@@ -24,5 +38,6 @@ spec:
       {{- if semverCompare ">=1.20-0" .Capabilities.KubeVersion.GitVersion }}
       appProtocol: http
       {{- end }}
+    {{- end }}
   selector:
     {{- include "app.selectorLabels" . | nindent 4 }}

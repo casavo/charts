@@ -60,9 +60,17 @@ spec:
             - configMapRef:
                 name: {{ include "app.fullname" . }}
           ports:
+            {{- if .Values.service.ports }}
+            {{- range $portName, $portData := .Values.service.ports }}
+            - name: {{ $portName }}
+              containerPort: {{ $portData.containerPort | default "8000" }}
+              protocol: TCP
+            {{- end }}
+            {{- else }}
             - name: http
               containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
+            {{- end }}
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
             {{- with .Values.probes.liveness }}
