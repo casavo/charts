@@ -2,6 +2,22 @@ apiVersion: v1
 entries:
   be-multisvc:
   - apiVersion: v2
+    created: "2022-06-13T13:35:30.143990954Z"
+    description: Generic multi service BE application
+    digest: a7cae5ca110e75cc4b34cb9afda7401e0f46ac2987734cbb1d870963c37af317
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-multisvc
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-multisvc-0.5.0/be-multisvc-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2022-06-13T08:28:57.159105207Z"
     description: Generic multi service BE application
     digest: 19123271d893c3175a9fb5a09b831790184b5fdab5d9fa28a0bd1d321c5d5f96
@@ -198,6 +214,22 @@ entries:
     - https://github.com/casavo/charts/releases/download/be-multisvc-0.1.0/be-multisvc-0.1.0.tgz
     version: 0.1.0
   be-web:
+  - apiVersion: v2
+    created: "2022-06-13T13:35:30.802366662Z"
+    description: Generic web BE application
+    digest: b54ec6a850a82b51acc91b04091abb650d4bfb148c1b7fecbad6b57f871fb05e
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-web
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-web-0.6.0/be-web-0.6.0.tgz
+    version: 0.6.0
   - apiVersion: v2
     created: "2022-06-13T08:28:57.267022928Z"
     description: Generic web BE application
@@ -578,4 +610,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/fe-static-0.1.0/fe-static-0.1.0.tgz
     version: 0.1.0
-generated: "2022-06-13T08:28:57.267157933Z"
+generated: "2022-06-13T13:35:30.802503763Z"
