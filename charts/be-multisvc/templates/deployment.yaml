@@ -111,10 +111,19 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           volumeMounts:
+          {{- if .Values.configVolume.enabled }}
+            - name: config-vol
+              mountPath: {{ .Values.configVolume.mountPath | default "/config" }}
+          {{- end }}
           {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
+      {{- if .Values.configVolume.enabled }}
+        - name: config-vol
+          configMap:
+            name: {{ include "app.fullname" . }}-vol
+      {{- end }}
       {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

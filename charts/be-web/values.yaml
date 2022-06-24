@@ -131,6 +131,13 @@ envValueFrom: {}
 config: {}
   # environment: debug
 
+configVolume:
+  enabled: false
+  # mountPath: /config
+  # data:
+  #   config.yaml: |
+  #     environment: debug
+
 hooks: []
   # - name: example
   #   on: post-install,pre-upgrade
