@@ -138,6 +138,8 @@ configVolume:
   #   config.yaml: |
   #     environment: debug
 
+sidecarContainers: {}
+
 hooks: []
   # - name: example
   #   on: post-install,pre-upgrade
@@ -220,6 +222,7 @@ monitoring:
     path: /metrics
     serviceMonitor: false
     podMonitor: false
+    podMonitors: {}
 
   alerts: []
     # - alert: ExampleError
