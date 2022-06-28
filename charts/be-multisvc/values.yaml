@@ -143,6 +143,8 @@ configVolume:
   #   config.yaml: |
   #     environment: debug
 
+sidecarContainers: {}
+
 hooks: []
   # - name: example
   #   "on": post-install,pre-upgrade # WARNING: use quotes around "on" https://yaml.org/type/bool.html
@@ -226,6 +228,7 @@ monitoring:
     port: "8000"
     serviceMonitor: false
     podMonitor: false
+    podMonitors: {}
 
   alerts: []
     # - alert: ExampleError

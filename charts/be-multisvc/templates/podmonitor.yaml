@@ -21,3 +21,33 @@ spec:
     matchLabels:
       {{- include "app.selectorLabels" . | nindent 6 }}
 {{- end }}
+{{- range $key, $val := .Values.monitoring.metrics.podMonitors }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "app.fullname" $ }}-{{ $key }}
+  labels:
+    {{- include "app.labels" $ | nindent 4 }}
+  {{- with $.Values.podAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  podMetricsEndpoints:
+    {{- with $val }}
+    - interval: {{ .interval | default "30s" }}
+      port: {{ .port | quote }}
+      path: {{ .path }}
+      {{- if .basicAuth }}
+      basicAuth:
+        {{- toYaml .basicAuth | nindent 8 }}
+      {{- end }}
+    {{- end }}
+  namespaceSelector:
+    matchNames:
+      - {{ $.Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "app.selectorLabels" $ | nindent 6 }}
+{{- end }}
