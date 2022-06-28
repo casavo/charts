@@ -48,6 +48,7 @@ probes:
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
+    failureThreshold: 3
   readiness:
     enabled: false
     path: /_health
@@ -55,6 +56,7 @@ probes:
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
+    failureThreshold: 3
   startup:
     enabled: false
     path: /_health
@@ -62,6 +64,7 @@ probes:
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
+    failureThreshold: 3
 
 ingresses:
   web:
