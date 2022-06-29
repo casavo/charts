@@ -96,6 +96,7 @@ spec:
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
+            failureThreshold: {{ .failureThreshold }}
             {{- end }}
           {{- end }}
           {{- with .probes.readiness }}
@@ -107,6 +108,7 @@ spec:
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
+            failureThreshold: {{ .failureThreshold }}
             {{- end }}
           {{- end }}
           {{- with .probes.startup }}
@@ -118,6 +120,7 @@ spec:
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
             timeoutSeconds: {{ .timeoutSeconds }}
+            failureThreshold: {{ .failureThreshold }}
             {{- end }}
           {{- end }}
           {{- with .resources | default $.Values.resources }}
