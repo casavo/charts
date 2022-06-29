@@ -46,18 +46,21 @@ probes:
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
+    failureThreshold: 3
   readiness:
     enabled: false
     path: /_health
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
+    failureThreshold: 3
   startup:
     enabled: false
     path: /_health
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
+    failureThreshold: 3
 
 ingress:
   enabled: false
@@ -193,10 +196,23 @@ workers: {}
   #       initialDelaySeconds: 30
   #       periodSeconds: 10
   #       timeoutSeconds: 5
+  #       failureThreshold: 3
   #     readiness:
   #       enabled: false
+  #       path: /_ready
+  #       port: "8000"
+  #       initialDelaySeconds: 30
+  #       periodSeconds: 10
+  #       timeoutSeconds: 5
+  #       failureThreshold: 3
   #     startup:
   #       enabled: false
+  #       path: /_start
+  #       port: "8000"
+  #       initialDelaySeconds: 30
+  #       periodSeconds: 10
+  #       timeoutSeconds: 5
+  #       failureThreshold: 3
 
 crons: {}
   # example:
