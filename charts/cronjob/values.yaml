@@ -1,0 +1,22 @@
+image:
+  repository:
+  tag: latest
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+# -- Custom labels to add into metadata
+labels: {}
+  # foo: bar
+
+schedule:
+suspend: false
+concurrencyPolicy: Forbid
+startingDeadlineSeconds: 300
+backoffLimit: 0
+restartPolicy: Never
+
+envFrom: []
+
+## app configuration
+config: {}
+  # environment: debug
