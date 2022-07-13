@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
-name: cronjob
-description: Generic Scheduled Job
+name: be-cron
+description: Generic cron BE application
 
 version: 0.1.0
 kubeVersion: ">=1.14.0-0"
