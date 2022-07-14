@@ -22,8 +22,8 @@ spec:
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               envFrom:
                 {{- with .Values.envFrom }}
-                {{- toYaml . | nindent 12 }}
+                {{- toYaml . | nindent 14 }}
                 {{- end }}
               - configMapRef:
-                name: {{ include "app.fullname" . }}
+                  name: {{ include "app.fullname" . }}
           restartPolicy: {{ .Values.restartPolicy }}
