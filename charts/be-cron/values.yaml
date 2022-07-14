@@ -8,7 +8,7 @@ image:
 labels: {}
   # foo: bar
 
-schedule:
+schedule: ""
 suspend: false
 concurrencyPolicy: Forbid
 startingDeadlineSeconds: 300
