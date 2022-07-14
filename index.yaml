@@ -2,6 +2,22 @@ apiVersion: v1
 entries:
   be-cron:
   - apiVersion: v2
+    created: "2022-07-14T15:05:57.341114303Z"
+    description: Generic cron BE application
+    digest: db8d14b22976ee508449a17d782f8ddaf6236197194cb2a65c58b07ba2af3d7d
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-cron
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-cron-0.1.1/be-cron-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2022-07-14T07:23:35.223104599Z"
     description: Generic cron BE application
     digest: d20523b1a8bb352ecd093711d913f9eba6a965ce424ab8ef604d05b5a9a41ee8
@@ -755,4 +771,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/fe-static-0.1.0/fe-static-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-14T07:23:35.223463999Z"
+generated: "2022-07-14T15:05:57.341263905Z"
