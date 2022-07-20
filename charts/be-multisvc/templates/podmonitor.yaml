@@ -12,7 +12,7 @@ metadata:
 spec:
   podMetricsEndpoints:
     - interval: 30s
-      port: {{ .Values.monitoring.metrics.port | quote }}
+      port: {{ .Values.monitoring.metrics.portName | default "web" | quote }}
       path: {{ .Values.monitoring.metrics.path }}
   namespaceSelector:
     matchNames:
