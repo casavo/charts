@@ -12,7 +12,7 @@ metadata:
 spec:
   podMetricsEndpoints:
     - interval: 30s
-      port: {{ .Values.service.containerPort | quote }}
+      port: {{ .Values.monitoring.metrics.portName | default "http" | quote }}
       path: {{ .Values.monitoring.metrics.path }}
   namespaceSelector:
     matchNames:
