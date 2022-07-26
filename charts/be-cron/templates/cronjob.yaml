@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: {{ include "app.fullname" . }}
 spec:
-  schedule: {{ .Values.schedule }}
+  schedule: "{{ .Values.schedule }}"
   concurrencyPolicy: {{ .Values.concurrencyPolicy }}
   startingDeadlineSeconds: {{ .Values.startingDeadlineSeconds }}
   suspend: {{ .Values.suspend }}
