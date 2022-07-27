@@ -10,7 +10,7 @@ metadata:
     {{- include "app.cronLabels" $cdata | nindent 4 }}
     app.kubernetes.io/component: batch-process
 spec:
-  schedule: "{{ .schedule }}"
+  schedule: {{ .schedule | quote }}
   startingDeadlineSeconds: 1000
   suspend: {{ .suspend }}
   concurrencyPolicy: Forbid
