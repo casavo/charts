@@ -18,7 +18,7 @@ spec:
     {{- range $portName, $portData := .Values.service.ports }}
     - name: {{ $portName }}
       port: {{ $portData.port | default "8000" }}
-      {{- if and (or (eq .Values.service.type "NodePort") (eq .Values.service.type "LoadBalancer")) .Values.service.nodePort }}
+      {{- if and (or (eq $.Values.service.type "NodePort") (eq $.Values.service.type "LoadBalancer")) $.Values.service.nodePort }}
       nodePort: {{ .Values.service.nodePort }}
       {{- end }}
       targetPort: {{ $portData.containerPort | default "8000" }}
