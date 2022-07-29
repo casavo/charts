@@ -84,6 +84,10 @@ spec:
               resources:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
+              volumeMounts:
+              {{- with .volumeMounts }}
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
           restartPolicy: Never
           {{- with .nodeSelector }}
           nodeSelector:
@@ -95,6 +99,10 @@ spec:
           {{- end }}
           {{- with $.Values.tolerations }}
           tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumes:
+          {{- with .volumes }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       backoffLimit: 0
