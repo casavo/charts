@@ -101,8 +101,8 @@ spec:
           tolerations:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          volumes:
           {{- with .volumes }}
+          volumes:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       backoffLimit: 0
