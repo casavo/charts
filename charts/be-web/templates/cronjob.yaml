@@ -84,8 +84,8 @@ spec:
               resources:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
-              volumeMounts:
               {{- with .volumeMounts }}
+              volumeMounts:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
           restartPolicy: Never
