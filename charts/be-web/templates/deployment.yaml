@@ -119,10 +119,6 @@ spec:
           {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.command }}
-          command:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
         {{- range $sidecarKey, $sidecarData := .Values.sidecarContainers }}
         - name: {{ $sidecarKey }}
           {{- toYaml $sidecarData | nindent 10 }}
