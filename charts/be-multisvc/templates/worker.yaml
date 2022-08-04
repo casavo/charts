@@ -87,6 +87,7 @@ spec:
             {{- end }}
             - configMapRef:
                 name: {{ include "app.fullname" $ }}
+          {{- with .probes }}
           {{- with .probes.liveness }}
           livenessProbe:
             {{- if .enabled }}
@@ -122,6 +123,7 @@ spec:
             timeoutSeconds: {{ .timeoutSeconds }}
             failureThreshold: {{ .failureThreshold }}
             {{- end }}
+          {{- end }}
           {{- end }}
           {{- with .resources | default $.Values.resources }}
           resources:
