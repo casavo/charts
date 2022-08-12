@@ -1,4 +1,9 @@
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: batch/v1
+{{- else -}}
 apiVersion: batch/v1beta1
+{{- end }}
+
 kind: CronJob
 metadata:
   name: {{ include "app.fullname" . }}
