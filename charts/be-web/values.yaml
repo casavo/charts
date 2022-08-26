@@ -43,24 +43,24 @@ probes:
   liveness:
     enabled: false
     path: /_health
-    initialDelaySeconds: 30
+    initialDelaySeconds: 0
     periodSeconds: 10
     timeoutSeconds: 5
     failureThreshold: 3
   readiness:
     enabled: false
     path: /_health
-    initialDelaySeconds: 30
+    initialDelaySeconds: 0
     periodSeconds: 10
     timeoutSeconds: 5
     failureThreshold: 3
   startup:
     enabled: false
     path: /_health
-    initialDelaySeconds: 30
+    initialDelaySeconds: 0
     periodSeconds: 10
     timeoutSeconds: 5
-    failureThreshold: 3
+    failureThreshold: 6
 
 ingress:
   enabled: false
