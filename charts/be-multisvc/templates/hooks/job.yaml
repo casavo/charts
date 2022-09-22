@@ -76,7 +76,7 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      restartPolicy: OnFailure
+      restartPolicy: "{{ .restartPolicy | default "OnFailure" }}"
       {{- with .nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
