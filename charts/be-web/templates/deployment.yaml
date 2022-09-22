@@ -18,6 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+        checksum/secrets: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         prometheus.io/path: {{ .Values.monitoring.metrics.path }}
         prometheus.io/port: {{ .Values.monitoring.metrics.port | default .Values.service.containerPort | quote }}
         prometheus.io/scrape: {{ .Values.monitoring.metrics.enabled | quote }}
@@ -58,6 +59,8 @@ spec:
             {{- toYaml . | nindent 12 }}
             {{- end }}
             - configMapRef:
+                name: {{ include "app.fullname" . }}
+            - secretRef:
                 name: {{ include "app.fullname" . }}
           ports:
             {{- if .Values.service.ports }}
@@ -116,6 +119,10 @@ spec:
             - name: config-vol
               mountPath: {{ .Values.configVolume.mountPath | default "/config" }}
           {{- end }}
+          {{- if .Values.secretsVolume.enabled }}
+            - name: secrets-vol
+              mountPath: {{ .Values.secretsVolume.mountPath | default "/secrets" }}
+          {{- end }}
           {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -128,6 +135,12 @@ spec:
         - name: config-vol
           configMap:
             name: {{ include "app.fullname" . }}-vol
+      {{- end }}
+      {{- if .Values.secretsVolume.enabled }}
+        - name: secrets-vol
+          secret:
+            secretName: {{ include "app.fullname" . }}-vol
+            defaultMode: 0400
       {{- end }}
       {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
