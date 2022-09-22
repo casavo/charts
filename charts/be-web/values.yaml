@@ -134,12 +134,23 @@ envValueFrom: {}
 config: {}
   # environment: debug
 
+## app secrets
+secrets: {}
+  # password: foobar
+
 configVolume:
   enabled: false
   # mountPath: /config
   # data:
   #   config.yaml: |
   #     environment: debug
+
+secretsVolume:
+  enabled: false
+  # mountPath: /config
+  # data:
+  #   secrets.yaml: |
+  #     password: foovar
 
 sidecarContainers: {}
 
