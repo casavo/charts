@@ -51,3 +51,32 @@ spec:
     matchLabels:
       {{- include "app.selectorLabels" $ | nindent 6 }}
 {{- end }}
+{{- if .Values.monitoring.metrics.worker.podMonitor }}
+{{- range $key, $val := .Values.workers }}
+{{ $wdata := dict "name" $key "worker" $val "globals" $ }}
+{{- with $val }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "app.fullname" $ }}-podmonitor-{{ $key | replace "_" "-" }}
+  labels:
+    {{- include "app.workerLabels" $wdata | nindent 4 }}
+  {{- with $.Values.podAnnotations }}
+  annotations:
+    {{- toYaml  | nindent 4 }}
+  {{- end }}
+spec:
+  podMetricsEndpoints:
+    - interval: 30s
+      port: {{ $.Values.monitoring.metrics.worker.portName | default "http" | quote }}
+      path: {{ $.Values.monitoring.metrics.worker.path }}
+  namespaceSelector:
+    matchNames:
+      - {{ $.Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "app.workerSelectorLabels" $wdata | nindent 6 }}
+{{- end }}
+{{- end }}
+{{- end }}

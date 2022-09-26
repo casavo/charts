@@ -250,6 +250,11 @@ monitoring:
     serviceMonitor: false
     podMonitor: false
     podMonitors: {}
+    worker:
+      podMonitor: false
+      port: web
+      path: /metrics
+      portName: "web"
 
   alerts: []
     # - alert: ExampleError
