@@ -30,6 +30,11 @@ spec:
       {{- end }}
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") $ | sha256sum }}
         checksum/secrets: {{ include (print $.Template.BasePath "/secret.yaml") $ | sha256sum }}
+        {{- with $val.monitoring }}
+        prometheus.io/path: {{ .metrics.path | default "/metrics" }}
+        prometheus.io/port: {{ .metrics.port | default "http" | quote }}
+        prometheus.io/scrape: {{ .metrics.enabled | default false | quote }}
+        {{- end }}
       labels:
         {{- include "app.workerSelectorLabels" $wdata | nindent 8 }}
     spec:
@@ -90,8 +95,16 @@ spec:
                 name: {{ include "app.fullname" $ }}
             - secretRef:
                 name: {{ include "app.fullname" $ }}
+          {{- with .ports }}
+          ports:
+            {{- range $portName, $portValue := . }}
+            - name: {{ $portName }}
+              containerPort: {{ $portValue }}
+              protocol: TCP
+            {{- end }}
+          {{- end }}
           {{- with .probes }}
-          {{- with .probes.liveness }}
+          {{- with .liveness }}
           livenessProbe:
             {{- if .enabled }}
             httpGet:
@@ -103,7 +116,7 @@ spec:
             failureThreshold: {{ .failureThreshold }}
             {{- end }}
           {{- end }}
-          {{- with .probes.readiness }}
+          {{- with .readiness }}
           readinessProbe:
             {{- if .enabled }}
             httpGet:
@@ -115,7 +128,7 @@ spec:
             failureThreshold: {{ .failureThreshold }}
             {{- end }}
           {{- end }}
-          {{- with .probes.startup }}
+          {{- with .startup }}
           startupProbe:
             {{- if .enabled }}
             httpGet:
