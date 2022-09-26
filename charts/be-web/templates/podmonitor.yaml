@@ -69,8 +69,8 @@ metadata:
 spec:
   podMetricsEndpoints:
     - interval: 30s
-      port: {{ .monitoring.metrics.worker.portName | default "http" | quote }}
-      path: {{ .monitoring.metrics.worker.path | default "/metrics" }}
+      port: {{ .monitoring.metrics.portName | default "http" | quote }}
+      path: {{ .monitoring.metrics.path | default "/metrics" }}
   namespaceSelector:
     matchNames:
       - {{ $.Release.Namespace }}
