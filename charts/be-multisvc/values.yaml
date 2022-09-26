@@ -204,6 +204,16 @@ workers: {}
   #   affinity: {}
   #   nodeSelector: {}
 
+  #   ports:
+  #     http: 8000
+
+  #   monitoring:
+  #     metrics:
+  #       enabled: false
+  #       path: /metrics
+  #       port: http
+  #       podMonitor: false
+
   #   probes:
   #     liveness:
   #       enabled: false
