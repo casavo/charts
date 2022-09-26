@@ -2,7 +2,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: {{ include "app.fullname" . }}
+  name: {{ include "app.fullname" . }}-podmonitor
   labels:
     {{- include "app.labels" . | nindent 4 }}
   {{- with .Values.podAnnotations }}
@@ -26,7 +26,7 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: {{ include "app.fullname" $ }}-{{ $key }}
+  name: {{ include "app.fullname" $ }}-podmonitor-{{ $key }}
   labels:
     {{- include "app.labels" $ | nindent 4 }}
   {{- with $.Values.podAnnotations }}
