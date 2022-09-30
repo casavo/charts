@@ -8,15 +8,76 @@ image:
 labels: {}
   # foo: bar
 
+command: []
 schedule: ""
 suspend: false
 concurrencyPolicy: Forbid
 startingDeadlineSeconds: 300
+successfulJobsHistoryLimit: 3
 backoffLimit: 0
 restartPolicy: Never
 
+resources:
+  limits:
+    memory: 200Mi
+  requests:
+    cpu: 100m
+    memory: 100Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+  # podAntiAffinity:
+  #   requiredDuringSchedulingIgnoredDuringExecution:
+  #   - labelSelector:
+  #       matchExpressions:
+  #       - key: app
+  #         operator: In
+  #         values:
+  #         - example
+  #     topologyKey: "kubernetes.io/hostname"
+
+## Optional priorityClassName
+priorityClassName: ""
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+env: {}
 envFrom: []
+envValueFrom: {}
+  # POD_IP:
+  #   fieldRef:
+  #     fieldPath: status.podIP
 
 ## app configuration
 config: {}
   # environment: debug
+
+## app secrets
+secrets: {}
+  # password: foobar
+
+configVolume:
+  enabled: false
+  # mountPath: /config
+  # data:
+  #   config.yaml: |
+  #     environment: debug
+
+secretsVolume:
+  enabled: false
+  # mountPath: /config
+  # data:
+  #   secrets.yaml: |
+  #     password: foovar
