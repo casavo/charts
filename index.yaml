@@ -2,6 +2,22 @@ apiVersion: v1
 entries:
   be-cron:
   - apiVersion: v2
+    created: "2022-09-30T14:55:43.677819558Z"
+    description: Generic cron BE application
+    digest: 78f180dde82e292adb0c2396d4720237e00c7f91eb09d122badfb9b4ce800753
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-cron
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-cron-0.2.0/be-cron-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2022-08-12T13:10:16.049599699Z"
     description: Generic cron BE application
     digest: 4ebe43d70dbd6a61cba582a248cd2875de5767c6ec648b881a4f529c5442f947
@@ -1120,4 +1136,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/lightdash-0.3.7/lightdash-0.3.7.tgz
     version: 0.3.7
-generated: "2022-09-29T12:36:06.860383327Z"
+generated: "2022-09-30T14:55:43.678658169Z"
