@@ -1,0 +1,77 @@
+{{- range $name, $proxy := .Values.proxies }}
+{{- if and $proxy.ingress.className (not (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion)) }}
+  {{- if not (hasKey $proxy.ingress.annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set $proxy.ingress.annotations "kubernetes.io/ingress.class" $proxy.ingress.className}}
+  {{- end }}
+{{- end }}
+{{- $nameData := dict "globals" $ "name" $name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "app.proxyName" $nameData }}
+  labels:
+    {{- include "app.proxyLabels" $ | nindent 4 }}
+spec:
+  type: ExternalName
+  externalName: {{ $proxy.target | quote }}
+  ports:
+    - name: http
+      port: 80
+      targetPort: {{ $proxy.targetPort | default 80 }}
+      protocol: TCP
+      {{- if semverCompare ">=1.20-0" $.Capabilities.KubeVersion.GitVersion }}
+      appProtocol: http
+      {{- end }}
+  selector:
+    {{- include "app.proxySelectorLabels" $ | nindent 4 }}
+---
+{{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion -}}
+apiVersion: networking.k8s.io/v1
+{{- else -}}
+apiVersion: networking.k8s.io/v1beta1
+{{- end }}
+kind: Ingress
+metadata:
+  name: {{ include "app.proxyName" $nameData }}
+  labels:
+    {{- include "app.labels" $ | nindent 4 }}
+  annotations:
+    nginx.ingress.kubernetes.io/upstream-vhost: {{ $proxy.target | quote }}
+    nginx.ingress.kubernetes.io/rewrite-target: {{ $proxy.ingress.path.backend | quote }}
+    {{- with $proxy.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  {{- if and $proxy.ingress.className (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ $proxy.ingress.className }}
+  {{- end }}
+  {{- if $proxy.ingress.tls }}
+  tls:
+    {{- range $proxy.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    - host: {{ $proxy.ingress.host | quote }}
+      http:
+        paths:
+          - path: {{ $proxy.ingress.path.public | quote }}
+            {{- if and $proxy.ingress.pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ $proxy.ingress.pathType | default "Prefix" }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ include "app.proxyName" $nameData }}
+                port:
+                  number: 80
+              {{- else }}
+              serviceName: {{ include "app.proxyName" $nameData }}
+              servicePort: 80
+              {{- end }}
+{{- end }}
