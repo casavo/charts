@@ -24,22 +24,17 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 
 {{/*
+Create proxy FQDN
+*/}}
+{{- define "app.proxyFullname" -}}
+{{ include "app.fullname" .globals }}-{{ .name | replace "-" "_" }}
+{{- end }}
+
+{{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "app.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
-{{- end }}
-
-{{/*
-Common labels
-*/}}
-{{- define "app.labels" -}}
-helm.sh/chart: {{ include "app.chart" . }}
-{{ include "app.selectorLabels" . }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- with .Values.labels }}
-{{ toYaml . }}
-{{- end }}
 {{- end }}
 
 {{/*
@@ -51,11 +46,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Common proxy labels
+Common labels
 */}}
-{{- define "app.proxyLabels" -}}
+{{- define "app.baseLabels" -}}
 helm.sh/chart: {{ include "app.chart" . }}
-{{ include "app.proxySelectorLabels" . }}
+{{ include "app.selectorLabels" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- with .Values.labels }}
 {{ toYaml . }}
@@ -63,16 +58,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Selector labels
+Base labels
 */}}
-{{- define "app.proxySelectorLabels" -}}
-app.kubernetes.io/name: {{ include "app.name" . }}
-app.kubernetes.io/instance: proxy
-{{- end }}
-
-{{/*
-Create proxy name
-*/}}
-{{- define "app.proxyName" -}}
-{{ include "app.fullname" .globals }}-{{ .name | replace "-" "_" }}
+{{- define "app.labels" -}}
+{{ include "app.baseLabels" .globals }}
+app: {{ include "app.name" .globals }}-{{ .name | replace "-" "_" }}
 {{- end }}
