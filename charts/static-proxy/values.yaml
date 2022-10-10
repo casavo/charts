@@ -1,0 +1,15 @@
+labels: {}
+  # foo: bar
+
+proxies: {}
+  # assets:
+  #   target: assets.s3-website-eu-west-3.amazonaws.com
+  #   ingress:
+  #     host: app.domain.tld
+  #     path:
+  #       backend: /
+  #       public: /
+  #     tls: []
+  #     className: nginx
+  #     annotations:
+  #       kubernetes.io/tls-acme: "true"
