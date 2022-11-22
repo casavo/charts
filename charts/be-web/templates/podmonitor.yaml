@@ -54,7 +54,9 @@ spec:
 {{- range $key, $val := .Values.workers }}
 {{ $wdata := dict "name" $key "worker" $val "globals" $ }}
 {{- with $val }}
-{{- if .monitoring.metrics.podMonitor }}
+{{- with .monitoring }}
+{{- with .metrics }}
+{{- if .podMonitor }}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -69,14 +71,16 @@ metadata:
 spec:
   podMetricsEndpoints:
     - interval: 30s
-      port: {{ .monitoring.metrics.portName | default "http" | quote }}
-      path: {{ .monitoring.metrics.path | default "/metrics" }}
+      port: {{ .portName | default "http" | quote }}
+      path: {{ .path | default "/metrics" }}
   namespaceSelector:
     matchNames:
       - {{ $.Release.Namespace }}
   selector:
     matchLabels:
       {{- include "app.workerSelectorLabels" $wdata | nindent 6 }}
+{{- end }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
