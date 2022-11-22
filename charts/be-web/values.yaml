@@ -159,8 +159,8 @@ sidecarContainers: {}
 
 hooks: []
   # - name: example
-  #   on: post-install,pre-upgrade
-  #   weight: -1
+  #   "on": pre-install,pre-upgrade
+  #   weight: 0
 
   #   image:
   #     repository:
@@ -175,6 +175,9 @@ hooks: []
 
   #   affinity: {}
   #   nodeSelector: {}
+
+hooksConfig: true
+hooksSecret: true
 
 workers: {}
   # example:

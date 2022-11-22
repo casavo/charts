@@ -9,8 +9,8 @@ metadata:
   labels:
     {{- include "app.hookLabels" $hdata | nindent 4 }}
   annotations:
-    helm.sh/hook: {{ .on | default "post-install,pre-upgrade" }}
-    helm.sh/hook-weight: {{ .weight | default "-1" | quote }}
+    helm.sh/hook: {{ .on | default "pre-install,pre-upgrade" }}
+    helm.sh/hook-weight: {{ .weight | default "0" | quote }}
     helm.sh/hook-delete-policy: before-hook-creation
 spec:
   template:
@@ -73,6 +73,14 @@ spec:
             {{- with $.Values.envFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+            {{- if $.Values.hooksConfig }}
+            - configMapRef:
+                name: {{ include "app.fullname" $ }}-hook
+            {{- end }}
+            {{- if $.Values.hooksSecret }}
+            - secretRef:
+                name: {{ include "app.fullname" $ }}-hook
+            {{- end }}
             {{- with .envFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -80,6 +88,27 @@ spec:
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          volumeMounts:
+          {{- if and $.Values.configVolume.enabled $.Values.hooksConfig }}
+            - name: config-vol
+              mountPath: {{ $.Values.configVolume.mountPath | default "/config" }}
+          {{- end }}
+          {{- if and $.Values.secretsVolume.enabled $.Values.hooksSecret }}
+            - name: secrets-vol
+              mountPath: {{ $.Values.secretsVolume.mountPath | default "/secrets" }}
+          {{- end }}
+      volumes:
+      {{- if and $.Values.configVolume.enabled $.Values.hooksConfig }}
+        - name: config-vol
+          configMap:
+            name: {{ include "app.fullname" $ }}-vol-hook
+      {{- end }}
+      {{- if and $.Values.secretsVolume.enabled $.Values.hooksSecret }}
+        - name: secrets-vol
+          secret:
+            secretName: {{ include "app.fullname" $ }}-vol-hook
+            defaultMode: 0400
+      {{- end }}
       restartPolicy: "{{ .restartPolicy | default "OnFailure" }}"
       {{- with .nodeSelector }}
       nodeSelector:
