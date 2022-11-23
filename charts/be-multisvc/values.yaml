@@ -164,8 +164,8 @@ sidecarContainers: {}
 
 hooks: []
   # - name: example
-  #   "on": post-install,pre-upgrade # WARNING: use quotes around "on" https://yaml.org/type/bool.html
-  #   weight: -1
+  #   "on": pre-install,pre-upgrade
+  #   weight: 0
 
   #   image:
   #     repository:
@@ -180,6 +180,9 @@ hooks: []
 
   #   affinity: {}
   #   nodeSelector: {}
+
+hooksConfig: true
+hooksSecret: true
 
 workers: {}
   # example:
