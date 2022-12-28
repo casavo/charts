@@ -2,6 +2,22 @@ apiVersion: v1
 entries:
   be-cron:
   - apiVersion: v2
+    created: "2022-12-28T09:47:03.212831836Z"
+    description: Generic cron BE application
+    digest: 4401cbc15b956df29ec3d12a7cb13c0ad20558daa6265be0e9e80d5ed59f6bb8
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-cron
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-cron-0.2.1/be-cron-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
     created: "2022-09-30T14:55:43.677819558Z"
     description: Generic cron BE application
     digest: 78f180dde82e292adb0c2396d4720237e00c7f91eb09d122badfb9b4ce800753
@@ -98,6 +114,22 @@ entries:
     - https://github.com/casavo/charts/releases/download/be-cron-0.1.0/be-cron-0.1.0.tgz
     version: 0.1.0
   be-multisvc:
+  - apiVersion: v2
+    created: "2022-12-28T09:47:03.34651465Z"
+    description: Generic multi service BE application
+    digest: 4c5bc22bc3229a36b6283143154fd49be58d84e969910c6929a315e67f675ec7
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-multisvc
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-multisvc-0.15.1/be-multisvc-0.15.1.tgz
+    version: 0.15.1
   - apiVersion: v2
     created: "2022-11-23T15:35:36.926894307Z"
     description: Generic multi service BE application
@@ -536,6 +568,22 @@ entries:
     version: 0.1.0
   be-web:
   - apiVersion: v2
+    created: "2022-12-28T09:47:03.47886275Z"
+    description: Generic web BE application
+    digest: 1d19746712b53a7dc37b062a240f84a04277f280b5b4d169e48e0defa6ce8fbf
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-web
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-web-0.16.1/be-web-0.16.1.tgz
+    version: 0.16.1
+  - apiVersion: v2
     created: "2022-11-23T15:35:37.112559987Z"
     description: Generic web BE application
     digest: 22b04d42a8803867ea750cc27cbe9bc3d1d208129b3be2b214d61ec7cde8cbbf
@@ -957,6 +1005,22 @@ entries:
     version: 0.1.0
   fe-nextjs:
   - apiVersion: v2
+    created: "2022-12-28T09:47:03.636832621Z"
+    description: Generic FE NextJS application
+    digest: 00df2ac20bcc8c4758d44615355de809e64a0209d5eae967c0a52dced4edda08
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: fe-nextjs
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/fe-nextjs-0.4.2/fe-nextjs-0.4.2.tgz
+    version: 0.4.2
+  - apiVersion: v2
     created: "2022-10-17T09:15:55.653638605Z"
     description: Generic FE NextJS application
     digest: 58f1e8af376cc172e7fbd2879b34cb6a03acb865c7bd3a030ebbe67e8e550292
@@ -1121,6 +1185,22 @@ entries:
     version: 0.1.0
   fe-static:
   - apiVersion: v2
+    created: "2022-12-28T09:47:03.773410166Z"
+    description: Generic FE static application
+    digest: eea1eb6c7b2217237f08a6a111e3475faafb5b164bcda560be8d7b7f7e32ccd1
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: fe-static
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/fe-static-0.3.1/fe-static-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     created: "2022-06-10T09:39:30.446631284Z"
     description: Generic FE static application
     digest: 4f3bba4dfd32a5f471b055d9c280221e6d062500c1cc76cb29859956e9ecab3a
@@ -1265,4 +1345,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2022-11-23T15:35:37.112903684Z"
+generated: "2022-12-28T09:47:03.77381157Z"
