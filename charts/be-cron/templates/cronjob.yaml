@@ -39,7 +39,7 @@ spec:
             - name: {{ .Chart.Name }}
               {{- with .Values.securityContext }}
               securityContext:
-                {{- toYaml .Values.securityContext | nindent 16 }}
+                {{- toYaml . | nindent 16 }}
               {{- end }}
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
