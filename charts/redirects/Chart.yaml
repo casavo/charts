@@ -1,0 +1,14 @@
+apiVersion: v2
+type: application
+name: redirects
+description: Nginx ingress redirect implementation
+
+version: 0.1.0
+kubeVersion: ">=1.14.0-0"
+
+home: https://github.com/Casavo/charts
+sources:
+  - https://github.com/Casavo/charts
+maintainers:
+  - name: Casavo
+    email: engineering@casavo.com
