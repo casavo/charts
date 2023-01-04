@@ -1328,6 +1328,23 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/lightdash-0.3.7/lightdash-0.3.7.tgz
     version: 0.3.7
+  redirects:
+  - apiVersion: v2
+    created: "2023-01-04T11:38:57.638798804Z"
+    description: Nginx ingress redirect implementation
+    digest: e38be2747dc9a609bb0f379acf25f2066002a7ae6b5edfa928dfc79ae62360bb
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: redirects
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/redirects-0.1.0/redirects-0.1.0.tgz
+    version: 0.1.0
   static-proxy:
   - apiVersion: v2
     created: "2022-10-10T13:15:35.379046164Z"
@@ -1345,4 +1362,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-28T09:47:03.77381157Z"
+generated: "2023-01-04T11:38:57.639214303Z"
