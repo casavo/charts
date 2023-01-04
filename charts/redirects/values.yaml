@@ -1,0 +1,18 @@
+labels: {}
+  # foo: bar
+
+redirects: {}
+  # example:
+  #   sources:
+  #     - some.domain.tld
+  #   target: https://target.domain.tld$request_uri
+
+  #   ingress:
+  #     # className: nginx
+  #     annotations:
+  #       kubernetes.io/tls-acme: "true"
+
+  #     tls:
+  #       - secretName: tls-some.domain.tld
+  #         hosts:
+  #           - some.domain.tld
