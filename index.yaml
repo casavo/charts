@@ -1362,6 +1362,22 @@ entries:
     version: 0.3.7
   redirects:
   - apiVersion: v2
+    created: "2023-01-04T17:46:47.767759351Z"
+    description: Nginx ingress redirect implementation
+    digest: 575660fe4d7d2b78c8f2657fe6deb5378fcf8b73eb46df8b22681b10ca0bf6ee
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: redirects
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/redirects-0.1.1/redirects-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2023-01-04T11:38:57.638798804Z"
     description: Nginx ingress redirect implementation
     digest: e38be2747dc9a609bb0f379acf25f2066002a7ae6b5edfa928dfc79ae62360bb
@@ -1394,4 +1410,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-04T14:17:32.53634566Z"
+generated: "2023-01-04T17:46:47.768110257Z"
