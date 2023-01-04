@@ -27,7 +27,7 @@ If release name contains chart name it will be used as a full name.
 Create ingress FQDN
 */}}
 {{- define "app.ingressFullname" -}}
-{{ include "app.fullname" .globals }}-{{ .name | replace "-" "_" }}
+{{ include "app.fullname" .globals }}-{{ .name }}
 {{- end }}
 
 {{/*
