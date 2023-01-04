@@ -161,12 +161,12 @@ spec:
       {{- if $.Values.configVolume.enabled }}
         - name: config-vol
           configMap:
-            name: {{ include "app.fullname" . }}-vol
+            name: {{ include "app.fullname" $ }}-vol
       {{- end }}
       {{- if $.Values.secretsVolume.enabled }}
         - name: secrets-vol
           secret:
-            secretName: {{ include "app.fullname" . }}-vol
+            secretName: {{ include "app.fullname" $ }}-vol
             defaultMode: 0400
       {{- end }}
       {{- with $.Values.volumes }}
