@@ -1,0 +1,9 @@
+labels: {}
+  # foo: bar
+
+storage: 10Gi 
+storageClassName: gp2
+accessModes: 
+  - ReadWriteOnce
+
+

@@ -1,0 +1,14 @@
+apiVersion: v2
+type: application
+name: pvc
+description: PVC chart
+
+version: 0.0.1
+kubeVersion: ">=1.14.0-0"
+
+home: https://github.com/Casavo/charts
+sources:
+  - https://github.com/Casavo/charts
+maintainers:
+  - name: Casavo
+    email: engineering@casavo.com
