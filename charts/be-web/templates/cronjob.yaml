@@ -29,6 +29,9 @@ spec:
           imagePullSecrets:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with $.Values.serviceAccount }}
+          serviceAccountName: {{ . | quote }}
+          {{- end }}
           {{- with $.Values.priorityClassName }}
           priorityClassName: {{ . | quote }}
           {{- end }}

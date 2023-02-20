@@ -109,6 +109,9 @@ affinity: {}
 ## Optional priorityClassName
 priorityClassName: ""
 
+## Optional serviceAccount
+serviceAccount: ""
+
 podSecurityContext: {}
   # fsGroup: 2000
 
