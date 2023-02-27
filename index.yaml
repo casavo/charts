@@ -1376,6 +1376,23 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/lightdash-0.3.7/lightdash-0.3.7.tgz
     version: 0.3.7
+  raw:
+  - apiVersion: v2
+    created: "2023-02-27T17:48:10.394861892Z"
+    description: Raw resources chart
+    digest: a1d33de73bfa6859f98f5565c26b2df34e7343300a5011d6da41d72f4c589e40
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: raw
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/raw-0.1.0/raw-0.1.0.tgz
+    version: 0.1.0
   redirects:
   - apiVersion: v2
     created: "2023-01-04T17:46:47.767759351Z"
@@ -1426,4 +1443,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-20T18:16:29.935530809Z"
+generated: "2023-02-27T17:48:10.395434089Z"
