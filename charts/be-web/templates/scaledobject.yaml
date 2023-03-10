@@ -1,0 +1,12 @@
+{{- if .Values.autoscaling.keda.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ template "app.fullname" . }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.autoscaling.keda.spec }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
