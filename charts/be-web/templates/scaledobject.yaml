@@ -21,7 +21,7 @@ spec:
   {{- end }}
 {{- end }}
 {{- range $key, $wrk := .Values.workers }}
-{{ $kind := $val.kind | default "Deployment" }}
+{{ $kind := $wrk.kind | default "Deployment" }}
 {{ $wdata := dict "name" $key "worker" $wrk "globals" $ }}
 {{ $scaling := $wrk.autoscaling | default dict }}
 {{ $keda := $scaling.keda | default dict }}
