@@ -22,23 +22,16 @@ autoscaling:
   targetMemoryUtilizationPercentage: 150
   keda:
     enabled: false
-    spec: {}
-    # # See https://keda.sh/docs/2.10/concepts/scaling-deployments/ for detailed ref
-    # scaleTargetRef:
-    #   kind: Deployment
-    #   name: image-anonymizer
-    # minReplicaCount: 0
-    # maxReplicaCount: 1
-    # advanced:
-    #   restoreToOriginalReplicaCount: true
+    # pollingInterval: 30
+    # cooldownPeriod: 300
     # triggers:
     # - type: rabbitmq
     #   metadata:
-    #     hostFromEnv: RABBITMQ_HOST # Optional. You can use this instead of `host` parameter
+    #     hostFromEnv: KEDA_RABBITMQ_DSN
     #     mode: QueueLength
     #     value: "1"
-    #     queueName: sellers_media_to_anonymize
-    #     vhostName: sellers
+    #     queueName: queue
+    #     vhostName: vhost
 
 ## See `kubectl explain poddisruptionbudget.spec` for more
 ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
@@ -218,6 +211,19 @@ workers: {}
   #     maxReplicas: 5
   #     targetCPUUtilizationPercentage: 200
   #     targetMemoryUtilizationPercentage: 150
+
+  #     keda:
+  #       enabled: false
+  #       pollingInterval: 30
+  #       cooldownPeriod: 300
+  #       triggers:
+  #         - type: rabbitmq
+  #           metadata:
+  #             hostFromEnv: KEDA_RABBITMQ_DSN
+  #             mode: QueueLength
+  #             value: "1"
+  #             queueName: queue
+  #             vhostName: vhost
 
   #   env: {}
   #   envFrom: []
