@@ -20,6 +20,18 @@ autoscaling:
   maxReplicas: 5
   targetCPUUtilizationPercentage: 200
   targetMemoryUtilizationPercentage: 150
+  keda:
+    enabled: false
+    # pollingInterval: 30
+    # cooldownPeriod: 300
+    # triggers:
+    # - type: rabbitmq
+    #   metadata:
+    #     hostFromEnv: KEDA_RABBITMQ_DSN
+    #     mode: QueueLength
+    #     value: "1"
+    #     queueName: queue
+    #     vhostName: vhost
 
 ## See `kubectl explain poddisruptionbudget.spec` for more
 ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
@@ -199,6 +211,19 @@ workers: {}
   #     maxReplicas: 5
   #     targetCPUUtilizationPercentage: 200
   #     targetMemoryUtilizationPercentage: 150
+
+  #     keda:
+  #       enabled: false
+  #       pollingInterval: 30
+  #       cooldownPeriod: 300
+  #       triggers:
+  #         - type: rabbitmq
+  #           metadata:
+  #             hostFromEnv: KEDA_RABBITMQ_DSN
+  #             mode: QueueLength
+  #             value: "1"
+  #             queueName: queue
+  #             vhostName: vhost
 
   #   env: {}
   #   envFrom: []

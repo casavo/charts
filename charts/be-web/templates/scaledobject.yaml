@@ -1,0 +1,51 @@
+{{- if .Values.autoscaling.keda.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "app.fullname" . }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: {{ include "app.fullname" . }}
+  minReplicaCount: {{ .Values.autoscaling.minReplicas }}
+  maxReplicaCount: {{ .Values.autoscaling.maxReplicas }}
+  pollingInterval: {{ .Values.autoscaling.keda.pollingInterval | default 30 }}
+  cooldownPeriod: {{ .Values.autoscaling.keda.cooldownPeriod | default 300 }}
+  advanced:
+    restoreToOriginalReplicaCount: true
+  triggers:
+  {{- with .Values.autoscaling.keda.triggers }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+{{- range $key, $wrk := .Values.workers }}
+{{ $kind := $wrk.kind | default "Deployment" }}
+{{ $wdata := dict "name" $key "worker" $wrk "globals" $ }}
+{{ $scaling := $wrk.autoscaling | default dict }}
+{{ $keda := $scaling.keda | default dict }}
+{{- if $keda.enabled }}
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "app.fullname" $ }}-wrk-{{ $key | replace "_" "-" }}
+  labels:
+    {{- include "app.workerLabels" $wdata | nindent 4 }}
+spec:
+  scaleTargetRef:
+    kind: {{ $kind }}
+    name: {{ include "app.fullname" $ }}-wrk-{{ $key | replace "_" "-" }}
+  minReplicaCount: {{ $scaling.minReplicas | default 0 }}
+  maxReplicaCount: {{ $scaling.maxReplicas | default 1 }}
+  pollingInterval: {{ $keda.pollingInterval | default 30 }}
+  cooldownPeriod: {{ $keda.cooldownPeriod | default 300 }}
+  advanced:
+    restoreToOriginalReplicaCount: true
+  triggers:
+  {{- with $keda.triggers }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+{{- end }}
