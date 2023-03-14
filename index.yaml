@@ -584,6 +584,22 @@ entries:
     version: 0.1.0
   be-web:
   - apiVersion: v2
+    created: "2023-03-14T07:28:20.773930315Z"
+    description: Generic web BE application
+    digest: e946c1579492bd45d73ccab2368df3d54895a7c6b2d502127890f9396f6895a9
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-web
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-web-0.18.0/be-web-0.18.0.tgz
+    version: 0.18.0
+  - apiVersion: v2
     created: "2023-02-20T18:16:29.934949388Z"
     description: Generic web BE application
     digest: bb7910185551496e8d2c68c8183140c9d28997b2610c571436842c62f90cf8dd
@@ -1443,4 +1459,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-27T17:48:10.395434089Z"
+generated: "2023-03-14T07:28:20.774406212Z"
