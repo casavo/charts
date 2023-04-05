@@ -1365,6 +1365,38 @@ entries:
     version: 0.1.0
   lightdash:
   - apiVersion: v2
+    appVersion: 0.379.0
+    created: "2023-04-05T08:48:39.71701284Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.x.x
+    - condition: browserless-chrome.enabled
+      name: browserless-chrome
+      repository: https://charts.sagikazarmark.dev
+      version: 0.0.4
+    description: A Helm chart to deploy lightdash on kubernetes
+    digest: a311220969a3b39a5550b9435f00231be6a0ce8bf7d1de4ea1780c32b8bfbf20
+    icon: https://docs.lightdash.com/img/logo.png
+    maintainers:
+    - email: oliver@lightdash.com
+      name: owlas
+      url: https://github.com/owlas
+    - email: jim@ramtank.com
+      name: jim80net
+      url: https://github.com/jim80net
+    name: lightdash
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/lightdash-0.7.3/lightdash-0.7.3.tgz
+    version: 0.7.3
+  - apiVersion: v2
     appVersion: 0.201.0
     created: "2022-09-29T12:36:06.860021914Z"
     dependencies:
@@ -1459,4 +1491,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-14T07:28:20.774406212Z"
+generated: "2023-04-05T08:48:39.717391542Z"
