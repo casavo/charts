@@ -2,7 +2,7 @@
 
 A Helm chart to deploy lightdash on kubernetes
 
-![Version: 0.3.7](https://img.shields.io/badge/Version-0.3.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.201.0](https://img.shields.io/badge/AppVersion-0.201.0-informational?style=flat-square)
+![Version: 0.7.3](https://img.shields.io/badge/Version-0.7.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.379.0](https://img.shields.io/badge/AppVersion-0.379.0-informational?style=flat-square)
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ Use `--set primary.persistence.enabled=false` to skip creating a persistent volu
 
 ```
 helm repo add lightdash https://lightdash.github.io/helm-charts
-helm install lightdash ligthdash/lightdash \
+helm install lightdash lightdash/lightdash \
   --set configMap.PGHOST=lightdashdb-postgresql.default.svc.cluster.local \
   --set secrets.PGPASSWORD=changeme \
 
@@ -36,7 +36,8 @@ helm install lightdash ligthdash/lightdash \
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.bitnami.com/bitnami | common | 1.x.x |
-| https://charts.bitnami.com/bitnami | postgresql | 10.x.x |
+| https://charts.bitnami.com/bitnami | postgresql | 11.x.x |
+| https://charts.sagikazarmark.dev | browserless-chrome | 0.0.4 |
 
 ## Values
 
@@ -50,6 +51,15 @@ If you don't want helm to manage this, you may wish to separately create a secre
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| backendConfig.create | bool | `false` |  |
+| browserless-chrome.enabled | bool | `true` |  |
+| browserless-chrome.image.tag | string | `""` |  |
+| browserless-chrome.replicaCount | int | `1` |  |
+| browserless-chrome.resources.limits.cpu | string | `"500m"` |  |
+| browserless-chrome.resources.limits.memory | string | `"512Mi"` |  |
+| browserless-chrome.resources.requests.cpu | string | `"500m"` |  |
+| browserless-chrome.resources.requests.memory | string | `"512Mi"` |  |
+| browserless-chrome.service.port | int | `80` |  |
 | configMap.DBT_PROJECT_DIR | string | `""` | Path to your local dbt project. Only set this value if you are mounting a DBT project |
 | configMap.PORT | string | `"8080"` | Port for lightdash |
 | configMap.SECURE_COOKIES | string | `"false"` | Secure Cookies |
@@ -57,10 +67,10 @@ If you don't want helm to manage this, you may wish to separately create a secre
 | configMap.TRUST_PROXY | string | `"false"` | Trust the reverse proxy when setting secure cookies (via the "X-Forwarded-Proto" header) |
 | externalDatabase.database | string | `"lightdash"` |  |
 | externalDatabase.existingSecret | string | `""` |  |
-| externalDatabase.existingSecretPasswordKey | string | `""` |  |
 | externalDatabase.host | string | `"localhost"` |  |
 | externalDatabase.password | string | `""` |  |
 | externalDatabase.port | int | `5432` |  |
+| externalDatabase.secretKeys.passwordKey | string | `"postgresql-password"` |  |
 | externalDatabase.user | string | `"lightdash"` |  |
 | extraContainers | list | `[]` |  |
 | fullnameOverride | string | `""` |  |
@@ -68,7 +78,7 @@ If you don't want helm to manage this, you may wish to separately create a secre
 | global.storageClass | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"lightdash/lightdash"` |  |
-| image.tag | string | `"0.138.0"` |  |
+| image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
@@ -77,23 +87,29 @@ If you don't want helm to manage this, you may wish to separately create a secre
 | ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | ingress.tls | list | `[]` |  |
+| livenessProbe.initialDelaySeconds | int | `20` |  |
+| livenessProbe.periodSeconds | int | `5` |  |
+| livenessProbe.timeoutSeconds | int | `2` |  |
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
+| postgresql.auth.database | string | `"lightdash"` |  |
+| postgresql.auth.existingSecret | string | `""` |  |
+| postgresql.auth.password | string | `""` |  |
+| postgresql.auth.secretKeys.userPasswordKey | string | `"password"` |  |
+| postgresql.auth.username | string | `"lightdash"` |  |
 | postgresql.commonAnnotations."helm.sh/hook" | string | `"pre-install,pre-upgrade"` |  |
 | postgresql.commonAnnotations."helm.sh/hook-weight" | string | `"-1"` |  |
-| postgresql.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | postgresql.enabled | bool | `true` |  |
-| postgresql.existingSecret | string | `""` |  |
-| postgresql.postgresqlDatabase | string | `"lightdash"` |  |
-| postgresql.postgresqlPassword | string | `"lightdash"` |  |
-| postgresql.postgresqlUsername | string | `"postgres"` |  |
+| readinessProbe.initialDelaySeconds | int | `60` |  |
+| readinessProbe.periodSeconds | int | `10` |  |
+| readinessProbe.timeoutSeconds | int | `5` |  |
 | replicaCount | int | `1` | Specify the number of lightdash instances. |
 | resources | object | `{}` |  |
 | secrets.LIGHTDASH_SECRET | string | `"changeme"` | This is the secret used to sign the session ID cookie and to encrypt sensitive information. Do not share this secret! |
 | securityContext | object | `{}` |  |
-| service.port | int | `80` |  |
+| service.port | int | `8080` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |

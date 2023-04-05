@@ -36,40 +36,39 @@ spec:
           command: {{ .Values.image.command }}
           args: {{ .Values.image.args }}
           env:
-            {{- if .Values.postgresql.enabled }}
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "lightdash.fullname" $ }}
-                  key: PGPASSWORD
-            {{- else }}
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "lightdash.postgresql.secretName" . }}
-                  key: {{ include "lightdash.database.existingsecret.key" . }}
+                  name: {{ (include "lightdash.database.secretName" .) }}
+                  key: {{ (include "lightdash.database.secret.passwordKey" .) }}
+            {{- if .Values.extraEnv }}
+            {{- toYaml .Values.extraEnv | nindent 8 }}
             {{- end }}
           envFrom:
-          {{- if $.Values.configMap }}
             - configMapRef:
                 name: {{ template "lightdash.fullname" $ }}
-          {{- end }}
-          {{- if $.Values.secrets }}
+            {{ if .Values.secrets }}
             - secretRef:
                 name: {{ template "lightdash.fullname" $ }}
-          {{- end }}
+            {{ end }}
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             httpGet:
-              path: /
-              port: http
+              path: /api/v1/livez
+              port: {{ .Values.service.port }}
           readinessProbe:
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
             httpGet:
-              path: /
-              port: http
+              path: /api/v1/health
+              port: {{ .Values.service.port }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         {{- if .Values.extraContainers }}
