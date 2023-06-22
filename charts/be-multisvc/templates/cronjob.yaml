@@ -2,7 +2,7 @@
 {{ $cdata := dict "name" $key "cron" $val "globals" $ }}
 {{ $imgdata := .image | default $.Values.image }}
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ include "app.fullname" $ }}-cron-{{ $key | replace "_" "-" }}
