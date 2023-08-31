@@ -165,6 +165,7 @@ configVolume:
 
 secretsVolume:
   enabled: false
+  mode: "0400"
   # mountPath: /config
   # data:
   #   secrets.yaml: |

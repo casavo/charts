@@ -88,7 +88,7 @@ spec:
             - name: secrets-vol
               secret:
                 secretName: {{ include "app.fullname" . }}-vol
-                defaultMode: 0400
+                defaultMode: {{ .Values.secretsVolume.mode | default "0400" }}
           {{- end }}
           restartPolicy: {{ .Values.restartPolicy }}
           {{- with .Values.nodeSelector }}
