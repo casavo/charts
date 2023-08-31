@@ -167,7 +167,7 @@ spec:
         - name: secrets-vol
           secret:
             secretName: {{ include "app.fullname" $ }}-vol
-            defaultMode: 0400
+            defaultMode: {{ $.Values.secretsVolume.mode | default "0400" }}
       {{- end }}
       {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
