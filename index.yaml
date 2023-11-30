@@ -131,6 +131,22 @@ entries:
     version: 0.1.0
   be-multisvc:
   - apiVersion: v2
+    created: "2023-11-30T15:30:19.225591603Z"
+    description: Generic multi service BE application
+    digest: c4e317597c9fadf71afdbf295c6f09bd1f9f3469298cc41c5e1f1debbbe418d8
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-multisvc
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-multisvc-0.17.0/be-multisvc-0.17.0.tgz
+    version: 0.17.0
+  - apiVersion: v2
     created: "2023-08-31T10:56:59.66475743Z"
     description: Generic multi service BE application
     digest: 76b204276c442a8b37a616352608c92c6b76a228df34b707646ad24e5253a25a
@@ -631,6 +647,22 @@ entries:
     - https://github.com/casavo/charts/releases/download/be-multisvc-0.1.0/be-multisvc-0.1.0.tgz
     version: 0.1.0
   be-web:
+  - apiVersion: v2
+    created: "2023-11-30T15:30:19.426676847Z"
+    description: Generic web BE application
+    digest: 40226eeb1c960599d499ed53509a8be1abf2cc8bdc54c5cd4383273685e4f30b
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-web
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-web-0.20.0/be-web-0.20.0.tgz
+    version: 0.20.0
   - apiVersion: v2
     created: "2023-08-31T10:56:59.819046291Z"
     description: Generic web BE application
@@ -1149,6 +1181,22 @@ entries:
     version: 0.1.0
   fe-nextjs:
   - apiVersion: v2
+    created: "2023-11-30T15:30:19.596936882Z"
+    description: Generic FE NextJS application
+    digest: 0a624379ef58912b8af745a11c6c01b558951761ee9fb8787762cbce739e15f6
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: fe-nextjs
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/fe-nextjs-0.5.0/fe-nextjs-0.5.0.tgz
+    version: 0.5.0
+  - apiVersion: v2
     created: "2022-12-28T09:47:03.636832621Z"
     description: Generic FE NextJS application
     digest: 00df2ac20bcc8c4758d44615355de809e64a0209d5eae967c0a52dced4edda08
@@ -1328,6 +1376,22 @@ entries:
     - https://github.com/casavo/charts/releases/download/fe-nextjs-0.1.0/fe-nextjs-0.1.0.tgz
     version: 0.1.0
   fe-static:
+  - apiVersion: v2
+    created: "2023-11-30T15:30:19.786716388Z"
+    description: Generic FE static application
+    digest: db695e293bbeb12088f8226b239607f71e1e6b6d27f0c2ecf9f1677ba6ab59c8
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: fe-static
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/fe-static-0.4.0/fe-static-0.4.0.tgz
+    version: 0.4.0
   - apiVersion: v2
     created: "2022-12-28T09:47:03.773410166Z"
     description: Generic FE static application
@@ -1571,4 +1635,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-31T10:56:59.819635686Z"
+generated: "2023-11-30T15:30:19.787175405Z"
