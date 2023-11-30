@@ -19,7 +19,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - uses: azure/setup-helm@v3
         with:
-          version: v3.4.0
+          version: v3.13.2
       - name: Helm deps
         run: |
           for dir in $(ls -d charts/*/); do
