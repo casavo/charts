@@ -3,8 +3,8 @@ type: application
 name: be-web
 description: Generic web BE application
 
-version: 0.19.1
-kubeVersion: ">=1.14.0-0"
+version: 0.20.0
+kubeVersion: ">=1.23.0-0"
 
 home: https://github.com/Casavo/charts
 sources:
