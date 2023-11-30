@@ -1,6 +1,6 @@
 {{- if .Values.autoscaling.enabled }}
 ---
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ template "app.fullname" . }}
@@ -32,7 +32,7 @@ spec:
 {{ $scaling := $wrk.autoscaling | default dict }}
 {{- if $scaling.enabled }}
 ---
-apiVersion: autoscaling/v2beta1
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ template "app.fullname" $ }}-wrk-{{ $key | replace "_" "-" }}
