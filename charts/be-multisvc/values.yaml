@@ -266,6 +266,7 @@ crons: {}
 
   #   affinity: {}
   #   nodeSelector: {}
+  #   tolerations: []
 
 monitoring:
   metrics:
