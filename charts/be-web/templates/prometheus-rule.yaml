@@ -4,9 +4,9 @@ kind: PrometheusRule
 metadata:
   name: {{ include "app.fullname" . }}-alerts
   labels:
-    prometheus: k8s
     role: alert-rules
     {{- include "app.labels" . | nindent 4 }}
+    release: prometheus
 spec:
   groups:
     - name: {{ include "app.fullname" . }}
