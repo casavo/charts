@@ -172,7 +172,7 @@ spec:
       {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .nodeSelector }}
+      {{- with $.Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
