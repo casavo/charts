@@ -110,7 +110,7 @@ spec:
             defaultMode: {{ $.Values.secretsVolume.mode | default "0400" }}
       {{- end }}
       restartPolicy: "{{ .restartPolicy | default "OnFailure" }}"
-      {{- with .nodeSelector }}
+      {{- with $.Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
