@@ -22,6 +22,10 @@ spec:
     spec:
       template:
         metadata:
+          annotations:
+          {{- with .Values.podAnnotations }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           labels:
             {{- include "app.cronLabels" $cdata | nindent 12 }}
         spec:
