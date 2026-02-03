@@ -94,11 +94,6 @@ spec:
               containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
             {{- end }}
-          {{- if .Values.persistence.enabled }}
-          volumeMounts:
-            - name: data-vol
-              mountPath: {{ .Values.persistence.mountPath }}
-          {{- end }}
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
             {{- with .Values.probes.liveness }}
@@ -140,6 +135,10 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           volumeMounts:
+          {{- if .Values.persistence.enabled }}
+            - name: data-vol
+              mountPath: {{ .Values.persistence.mountPath }}
+          {{- end }}
           {{- if .Values.configVolume.enabled }}
             - name: config-vol
               mountPath: {{ .Values.configVolume.mountPath | default "/config" }}
