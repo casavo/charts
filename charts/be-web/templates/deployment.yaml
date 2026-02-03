@@ -94,7 +94,7 @@ spec:
               containerPort: {{ .Values.service.containerPort }}
               protocol: TCP
             {{- end }}
-          {{ - if .Values.persistence.enabled }}
+          {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: data-vol
               mountPath: {{ .Values.persistence.mountPath }}
@@ -167,7 +167,7 @@ spec:
             secretName: {{ include "app.fullname" . }}-vol
             defaultMode: {{ .Values.secretsVolume.mode | default "0400" }}
       {{- end }}
-      {{ - if .Values.persistence.enabled }}
+      {{- if .Values.persistence.enabled }}
         - name: data-vol
           persistentVolumeClaim:
             claimName: {{ include "app.fullname" . }}
