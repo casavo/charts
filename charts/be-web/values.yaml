@@ -307,3 +307,8 @@ monitoring:
     #     sum without(instance, pod) ( increase(whatever[5m]) ) > 0
     #   labels:
     #     severity: critical
+
+persistence:
+  enabled: false
+  size: 20Gi
+  mountPath: /data
