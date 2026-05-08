@@ -8,7 +8,7 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ template "app.fullname" . }}
   labels:
-    {{ include "app.labels" . | indent 4 }}
+{{ include "app.labels" . | nindent 4 }}
 spec:
   {{- with .Values.podDisruptionBudget.minAvailable }}
   minAvailable: {{ . }}
