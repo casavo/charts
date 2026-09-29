@@ -9,6 +9,7 @@ spec:
   concurrencyPolicy: {{ .Values.concurrencyPolicy }}
   startingDeadlineSeconds: {{ .Values.startingDeadlineSeconds }}
   successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
   suspend: {{ .Values.suspend }}
   jobTemplate:
     metadata:
@@ -19,6 +20,9 @@ spec:
         {{- include "app.labels" . | nindent 8 }}
     spec:
       backoffLimit: {{ .Values.backoffLimit }}
+      {{- with .Values.ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ . }}
+      {{- end }}
       template:
         metadata:
           labels:

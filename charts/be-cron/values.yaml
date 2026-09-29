@@ -14,6 +14,14 @@ suspend: false
 concurrencyPolicy: Forbid
 startingDeadlineSeconds: 300
 successfulJobsHistoryLimit: 3
+# -- How many failed Jobs to keep. Kubernetes' own default, made configurable:
+# a retained Job keeps its Pod in Failed phase, which monitoring that watches
+# pod phase reports as unhealthy for as long as the Job is kept around.
+failedJobsHistoryLimit: 1
+# -- Seconds after which a finished Job (succeeded or failed) is deleted along
+# with its Pods. Unset by default, which keeps the current behaviour: Jobs are
+# only evicted by the history limits above. Note that 0 is not supported here.
+ttlSecondsAfterFinished:
 backoffLimit: 0
 restartPolicy: Never
 
