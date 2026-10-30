@@ -39,6 +39,11 @@ extraEnv:
 # -- Specify the number of lightdash instances.
 replicaCount: 1
 
+## See `kubectl explain deployment.spec.strategy` for more
+## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+deploymentStrategy:
+  type: RollingUpdate
+
 image:
   repository: lightdash/lightdash
   pullPolicy: IfNotPresent
