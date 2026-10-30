@@ -147,6 +147,22 @@ entries:
     version: 0.1.0
   be-multisvc:
   - apiVersion: v2
+    created: "2026-10-30T10:04:20.849653416Z"
+    description: Generic multi service BE application
+    digest: a94769c1d557b41a4609ffa8a73bcd33346ccbea5327302f45635aa3082ec68f
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-multisvc
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-multisvc-1.0.1/be-multisvc-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     created: "2026-08-05T13:11:04.339310691Z"
     description: Generic multi service BE application
     digest: 30c5705387835249a1eb7ad1d1be8a0b03dd5ce1eff3e41333936a315b45045a
@@ -823,6 +839,22 @@ entries:
     - https://github.com/casavo/charts/releases/download/be-multisvc-0.1.0/be-multisvc-0.1.0.tgz
     version: 0.1.0
   be-web:
+  - apiVersion: v2
+    created: "2026-10-30T10:04:21.046578557Z"
+    description: Generic web BE application
+    digest: 9db53e4910d9f47a853aee5e797f6e75ae82d5c4732d5a506cc2efa4a9c6586a
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: be-web
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/be-web-0.22.4/be-web-0.22.4.tgz
+    version: 0.22.4
   - apiVersion: v2
     created: "2026-05-08T12:10:15.224734929Z"
     description: Generic web BE application
@@ -1533,6 +1565,22 @@ entries:
     version: 0.1.0
   fe-nextjs:
   - apiVersion: v2
+    created: "2026-10-30T10:04:21.231961191Z"
+    description: Generic FE NextJS application
+    digest: 71eb22c2f7af7a2423027a0030f3a2502e038443f257d66858591c916f8e65c9
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: fe-nextjs
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/fe-nextjs-0.5.3/fe-nextjs-0.5.3.tgz
+    version: 0.5.3
+  - apiVersion: v2
     created: "2024-02-07T16:09:18.792579827Z"
     description: Generic FE NextJS application
     digest: 945fce1b7424c756775ea384fc3eea717b24e13c2dc29d38695bc5dada925b82
@@ -1761,6 +1809,22 @@ entries:
     version: 0.1.0
   fe-static:
   - apiVersion: v2
+    created: "2026-10-30T10:04:21.419844615Z"
+    description: Generic FE static application
+    digest: 00685583f55f33f7ba1ce9bcafab272951d5c6a86990c9ce833f81a12e280394
+    home: https://github.com/Casavo/charts
+    kubeVersion: '>=1.23.0-0'
+    maintainers:
+    - email: engineering@casavo.com
+      name: Casavo
+    name: fe-static
+    sources:
+    - https://github.com/Casavo/charts
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/fe-static-0.4.3/fe-static-0.4.3.tgz
+    version: 0.4.3
+  - apiVersion: v2
     created: "2024-02-07T16:09:18.989681175Z"
     description: Generic FE static application
     digest: 833e2c8ffc6a048e40faa22f29d9bc30247f82a2650b54524e901302af294010
@@ -1926,6 +1990,38 @@ entries:
   lightdash:
   - apiVersion: v2
     appVersion: 0.379.0
+    created: "2026-10-30T10:04:21.606339778Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.x.x
+    - condition: browserless-chrome.enabled
+      name: browserless-chrome
+      repository: https://charts.sagikazarmark.dev
+      version: 0.0.4
+    description: A Helm chart to deploy lightdash on kubernetes
+    digest: c00b5884be8be001351d7301767661ccfe5a0178ac73bd470779fe9ae57d8827
+    icon: https://docs.lightdash.com/img/logo.png
+    maintainers:
+    - email: oliver@lightdash.com
+      name: owlas
+      url: https://github.com/owlas
+    - email: jim@ramtank.com
+      name: jim80net
+      url: https://github.com/jim80net
+    name: lightdash
+    type: application
+    urls:
+    - https://github.com/casavo/charts/releases/download/lightdash-0.7.4/lightdash-0.7.4.tgz
+    version: 0.7.4
+  - apiVersion: v2
+    appVersion: 0.379.0
     created: "2023-04-05T08:48:39.71701284Z"
     dependencies:
     - name: common
@@ -2051,4 +2147,4 @@ entries:
     urls:
     - https://github.com/casavo/charts/releases/download/static-proxy-0.1.0/static-proxy-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-26T08:46:18.780236762Z"
+generated: "2026-10-30T10:04:21.607049015Z"
